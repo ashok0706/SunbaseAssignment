@@ -147,3 +147,10 @@ This project is licensed under the [Your License] - see the [LICENSE.md](LICENSE
 
 ## View pages
 
+![Screenshot (179)](https://github.com/ashok0706/SunbaseAssignment/assets/113377234/52f8394e-7337-4bb1-b058-902e220504c0)
+![Screenshot (181)](https://github.com/ashok0706/SunbaseAssignment/assets/113377234/c6efe91e-3a04-4790-84ff-0b8ec91df6be)
+![Screenshot (183)](https://github.com/ashok0706/SunbaseAssignment/assets/113377234/4bfb2b8c-994b-4a56-9415-69c3c0c004ab)
+
+
+
+
