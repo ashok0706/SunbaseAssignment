@@ -19,7 +19,7 @@ This is a simple CRUD application for managing customer information with Spring 
 1. **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/your-username/customer-management.git](https://github.com/ashok0706/SunbaseAssignment.git)
+    git clone https://github.com/ashok0706/SunbaseAssignment
     cd customer-management
     ```
 
@@ -144,3 +144,6 @@ This is a simple CRUD application for managing customer information with Spring 
 ## License
 
 This project is licensed under the [Your License] - see the [LICENSE.md](LICENSE.md) file for details.
+
+## View pages
+
