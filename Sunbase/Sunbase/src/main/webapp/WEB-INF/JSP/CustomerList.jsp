@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@ h1 {
 	/* justify-content: center;  */
 }
 
-button, select {
+button, select, input {
 	height: 40px;
 	width: 200px;
 	margin: 2px;
@@ -93,13 +94,15 @@ tr:nth-child(even) {
 			<button>Add Customer</button>
 		</form>
 		<!-- <input type="text" id="search-input" placeholder="Enter your search"> -->
-		<select id="search-category">
-			<option value="firstName">FirstName</option>
-			<option value="city">City</option>
-			<option value="email">Email</option>
-			<option value="phone">Phone</option>
-		</select>
-		<button id="search-button">Search</button>
+		<form action="getAll" method="get">
+			<select id="search-category" name="type">
+				<option value="firstName">FirstName</option>
+				<option value="city">City</option>
+				<option value="email">Email</option>
+				<option value="phone">Phone</option>
+			</select> <input type="text" placeholder="Enter Key" name="key">
+			<button id="search-button" type="submit">Search</button>
+		</form>
 	</div>
 
 	<div class="table">
@@ -110,6 +113,7 @@ tr:nth-child(even) {
 					<th>LastName</th>
 					<th>Address</th>
 					<th>City</th>
+					<th>State</th>
 					<th>Email</th>
 					<th>Phone</th>
 					<th>Action</th>
@@ -117,19 +121,28 @@ tr:nth-child(even) {
 
 			</thead>
 			<tbody>
-				<c:forEach var="list" items="${list}">
+
+				<c:forEach var="list" items="${List}">
 					<tr>
 						<td>${list.firstName}</td>
 						<td>${list.lastName}</td>
-
 						<td>${list.address}</td>
 						<td>${list.city}</td>
 						<td>${list.state}</td>
 						<td>${list.email}</td>
 						<td>${list.phone}</td>
-						<td><button  width = 50px >delete</button></td>
-						<td><button width = 50px>edit</button></td>
+
+						<form action="delete" method = "delete">
+						<td><button type="submit" name="fName"
+								value="${list.firstName}">delete</button></td>
+							
+						</form>
+						
+						<form action="add" method = "get">
+							<td><button type="submit">edit</button></td>
+						</form>
 					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

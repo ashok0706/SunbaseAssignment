@@ -20,15 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assignmet.Sunbase.Entity.Customer;
+import com.assignmet.Sunbase.Repository.CustomerRepo;
 import com.assignmet.Sunbase.Service.CustomerService;
 
 //import ch.qos.logback.core.model.Model;
 
 @Controller
+//@RestController
 public class CustomerControl {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CustomerRepo customerRepo;
 
 	
 	@GetMapping("/Login")
@@ -42,6 +47,9 @@ public class CustomerControl {
 	public String login(@RequestParam String usermail, @RequestParam String password, Model model) {
 		
 		if(usermail.equals("ashok") && password.equals("12345")) {
+			List<Customer> ls =  customerService.getCustomerAll();
+//			Optional<Customer> c = customerRepo.findById(55);
+			model.addAttribute("List", ls);
 			return "CustomerList";
 		}			
 		   model.addAttribute("error" ,"You have entered Wrong email and password");
@@ -60,15 +68,28 @@ public class CustomerControl {
 		
 		 customerService.saveAndUpadteCustomer(customer);
 		 List<Customer> ls = customerService.getCustomerAll();		 
-		 model.addAllAttributes(ls);
+		 model.addAttribute("List", ls);
 		return "CustomerList";
 	}
 	
 
 	@GetMapping("/getAll")
-	public List<Customer> getCustomerAll() {
-		return customerService.getCustomerAll();
-		
+	public String getCustomerAll(@RequestParam String type, @RequestParam String key, Model model) {
+		List<Customer> ls = null;
+		System.out.print(type + " "+ key);
+//		String search = "";
+		if(type.equals("firstName")) {
+			ls = customerRepo.findAllByFirstName(key);
+		}else if(type.equals("city")) {
+			ls = customerRepo.findAllByCity(key);
+		}else if(type.equals("email")) {
+			ls = customerRepo.findAllByEmail(key);
+		}else if(type.equals("phone")) {
+			ls = customerRepo.findAllByPhone(key);
+		}  
+//		Optional<Customer> c = customerRepo.findById(55);
+		model.addAttribute("List", ls);
+		return "CustomerList";
 	}
 
 	@GetMapping("/getById")
@@ -82,13 +103,15 @@ public class CustomerControl {
 	}
 
 	@DeleteMapping("/delete")
-	public String deleteCustomer(@RequestParam int id) {
+	public String deleteCustomer(@RequestParam String fName) {
 
-	Optional<Customer> customer = customerService.deleteCustomer(id);
-		if (customer.isEmpty()) {
-			return "No Data exits With Id";
-		}
-		return "Succefully Deleted";
+		System.out.print(fName);
+		
+//	Optional<Customer> customer = customerService.deleteCustomer();
+//		if (customer.isEmpty()) {
+//			return "No Data exits With Id";
+//		}
+		return "CustomerList";
 		
 	}
 
